@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIFE Event Listener</title>
+</head>
+<body>
+    <h1>Change My Color</h1>
+    <script>
+        (function () {
+            const header = document.querySelector('h1'); // Select the h1 element
+            header.style.color = 'red'; // Initially set the color to red
+
+            // Add an event listener to the body
+            document.body.addEventListener('click', function () {
+                header.style.color = 'blue'; // Change the color of the header to blue
+            });
+        })();
+    </script>
+</body>
+</html>

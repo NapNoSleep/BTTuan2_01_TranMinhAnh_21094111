@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jagged Array Max Finder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jagged Array Max Finder</h1>
+    
+    <label for="arrayInput">Jagged Array (in JSON format):</label>
+    <input type="text" id="arrayInput" placeholder='e.g. [1, [2, 3], [4, [5, 6]], 7, 8, [9, 10]]'>
+    
+    <button onclick="findMax()">Find Maximum</button>
+
+    <div id="result"></div>
+
+    <script>
+        function findMaxInJaggedArray(arr) {
+            let max = -Infinity; // Khởi tạo max với -Infinity
+
+            for (let element of arr) {
+                if (Array.isArray(element)) {
+                    max = Math.max(max, findMaxInJaggedArray(element)); // Gọi đệ quy nếu là mảng
+                } else if (typeof element === 'number') {
+                    max = Math.max(max, element); // Cập nhật max
+                }
+            }
+
+            return max; // Trả về số lớn nhất
+        }
+
+        function findMax() {
+            const arrayInput = document.getElementById('arrayInput').value; // Lấy đầu vào
+            let jaggedArray;
+
+            try {
+                jaggedArray = JSON.parse(arrayInput); // Chuyển đổi chuỗi JSON thành mảng
+                if (!Array.isArray(jaggedArray)) throw new Error(); // Kiểm tra xem có phải mảng không
+
+                const maxNumber = findMaxInJaggedArray(jaggedArray); // Tìm số lớn nhất
+                document.getElementById('result').innerHTML = `The maximum number in the jagged array is: ${maxNumber}`; // Hiển thị kết quả
+            } catch (error) {
+                document.getElementById('result').innerHTML = 'Invalid input. Please enter a valid jagged array in JSON format.'; // Thông báo lỗi
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jagged Array Sum Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jagged Array Sum Calculator</h1>
+    
+    <label for="arrayInput">Jagged Array (in JSON format):</label>
+    <input type="text" id="arrayInput" placeholder='e.g. [1, [2, 3], [4, [5, 6]], 7, 8, [9]]'>
+    
+    <button onclick="calculateSum()">Calculate Sum</button>
+
+    <div id="result"></div>
+
+    <script>
+        function sumJaggedArray(arr) {
+            let sum = 0; // Khởi tạo tổng
+
+            for (let element of arr) {
+                if (Array.isArray(element)) {
+                    sum += sumJaggedArray(element); // Gọi đệ quy nếu là mảng
+                } else if (typeof element === 'number') {
+                    sum += element; // Cộng số vào tổng
+                }
+            }
+
+            return sum; // Trả về tổng
+        }
+
+        function calculateSum() {
+            const arrayInput = document.getElementById('arrayInput').value; // Lấy đầu vào
+            let jaggedArray;
+
+            try {
+                jaggedArray = JSON.parse(arrayInput); // Chuyển đổi chuỗi JSON thành mảng
+                if (!Array.isArray(jaggedArray)) throw new Error(); // Kiểm tra xem có phải mảng không
+
+                const totalSum = sumJaggedArray(jaggedArray); // Tính tổng
+                document.getElementById('result').innerHTML = `The sum of all numbers in the jagged array is: ${totalSum}`; // Hiển thị kết quả
+            } catch (error) {
+                document.getElementById('result').innerHTML = 'Invalid input. Please enter a valid jagged array in JSON format.'; // Thông báo lỗi
+            }
+        }
+    </script>
+</body>
+</html>

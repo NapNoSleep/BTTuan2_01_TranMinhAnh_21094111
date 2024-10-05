@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distance Between First 100 Prime Numbers</title>
+</head>
+<body>
+
+    <h1>Distance Between First 100 Prime Numbers</h1>
+    <div id="result"></div> <!-- Phần tử để hiển thị kết quả -->
+
+    <script>
+        // Hàm kiểm tra một số có phải là số nguyên tố không
+        function isPrime(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        // Hàm để lấy 100 số nguyên tố đầu tiên
+        function getFirstNPrimes(n) {
+            const primes = [];
+            let num = 2; // Bắt đầu từ số nguyên tố đầu tiên
+
+            while (primes.length < n) {
+                if (isPrime(num)) {
+                    primes.push(num);
+                }
+                num++;
+            }
+            return primes;
+        }
+
+        // Tính khoảng cách giữa các số nguyên tố
+        function calculateDistances(primes) {
+            const distances = [];
+            for (let i = 1; i < primes.length; i++) {
+                distances.push(primes[i] - primes[i - 1]); // Khoảng cách giữa số nguyên tố hiện tại và số trước đó
+            }
+            return distances;
+        }
+
+        // Lấy 100 số nguyên tố đầu tiên
+        const first100Primes = getFirstNPrimes(100);
+        const distances = calculateDistances(first100Primes);
+        
+        // Hiển thị kết quả lên trang web
+        document.getElementById('result').innerHTML = `
+            The first 100 prime numbers are: ${first100Primes.join(', ')} <br>
+            The distances between the first 100 prime numbers are: ${distances.join(', ')}
+        `;
+    </script>
+
+</body>
+</html>

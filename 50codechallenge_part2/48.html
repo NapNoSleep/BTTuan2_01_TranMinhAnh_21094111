@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Longest Word</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find the Longest Word in a String</h1>
+    
+    <label for="textInput">Enter a string:</label>
+    <input type="text" id="textInput" placeholder="e.g. The quick brown fox jumps over the lazy dog.">
+    
+    <button onclick="findLongestWord()">Find Longest Word</button>
+
+    <div id="result"></div>
+
+    <script>
+        function longestWord(str) {
+            const words = str.match(/\w+/g);
+            if (!words) return ""; // Trả về chuỗi rỗng nếu không có từ nào
+
+            const longest = words.reduce((longest, current) => {
+                return current.length > longest.length ? current : longest;
+            }, "");
+
+            return longest; // Trả về từ dài nhất
+        }
+
+        function findLongestWord() {
+            const inputText = document.getElementById('textInput').value; // Lấy đầu vào
+            const longest = longestWord(inputText); // Gọi hàm tìm từ dài nhất
+            document.getElementById('result').innerHTML = `Longest word: ${longest}`; // Hiển thị kết quả
+        }
+   

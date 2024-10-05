@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Caesar Cipher</h1>
+    
+    <label for="textInput">Enter text:</label>
+    <input type="text" id="textInput" placeholder="e.g. Hello, World!">
+    
+    <br><br>
+    
+    <label for="shiftInput">Enter shift (e.g. 3):</label>
+    <input type="number" id="shiftInput" placeholder="e.g. 3">
+    
+    <br><br>
+    
+    <button onclick="encryptText()">Encrypt</button>
+
+    <div id="result"></div>
+
+    <script>
+        function caesarCipher(str, shift) {
+            const result = [];
+
+            for (let i = 0; i < str.length; i++) {
+                let char = str[i];
+
+                if (char.match(/[a-z]/i)) {
+                    const code = str.charCodeAt(i);
+                    if (char === char.toUpperCase()) {
+                        char = String.fromCharCode(((code - 65 + shift) % 26) + 65);
+                    } else {
+                        char = String.fromCharCode(((code - 97 + shift) % 26) + 97);
+                    }
+                }
+                result.push(char);
+            }
+
+            return result.join('');
+        }
+
+        function encryptText() {
+            const str = document.getElementById('textInput').value; // Lấy văn bản từ ô nhập
+            const shift = parseInt(document.getElementById('shiftInput').value); // Lấy giá trị dịch chuyển
+            const encodedText = caesarCipher(str, shift); // Mã hóa văn bản
+            document.getElementById('result').innerHTML = `Encoded Text: ${encodedText}`; // Hiển thị kết quả
+        }
+    </script>
+</body>
+</html>

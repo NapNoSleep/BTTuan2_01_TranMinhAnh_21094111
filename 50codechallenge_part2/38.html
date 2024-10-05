@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Array to String</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Convert ASCII Array to String</h1>
+    
+    <label for="asciiInput">Enter ASCII codes (comma separated):</label>
+    <input type="text" id="asciiInput" placeholder="e.g. 72, 101, 108, 108, 111, 33">
+    
+    <br><br>
+    
+    <button onclick="convertAscii()">Convert to String</button>
+
+    <div id="result"></div>
+
+    <script>
+        function asciiArrayToString(asciiArray) {
+            return asciiArray.map(code => String.fromCharCode(code)).join(''); // Chuyển đổi thành chuỗi
+        }
+
+        function convertAscii() {
+            const asciiInput = document.getElementById('asciiInput').value; // Lấy chuỗi ASCII từ ô nhập
+            const asciiArray = asciiInput.split(',').map(Number); // Chuyển đổi chuỗi thành mảng số
+            const resultString = asciiArrayToString(asciiArray); // Chuyển đổi thành chuỗi
+            document.getElementById('result').innerHTML = `Resulting String: ${resultString}`; // Hiển thị kết quả
+        }
+    </script>
+</body>
+</html>

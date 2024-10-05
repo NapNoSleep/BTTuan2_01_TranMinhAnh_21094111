@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Fibonacci(500)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculate Fibonacci(500)</h1>
+    
+    <button onclick="calculateFibonacci()">Calculate</button>
+
+    <div id="result"></div>
+
+    <script>
+        function fibonacci(n) {
+            if (n < 0) return "Invalid input"; // Kiểm tra đầu vào
+            if (n === 0) return BigInt(0); // Fibonacci(0) = 0
+            if (n === 1) return BigInt(1); // Fibonacci(1) = 1
+
+            let a = BigInt(0);
+            let b = BigInt(1);
+            let fib = BigInt(0);
+
+            for (let i = 2; i <= n; i++) {
+                fib = a + b; // Tính giá trị Fibonacci tiếp theo
+                a = b; // Cập nhật giá trị a
+                b = fib; // Cập nhật giá trị b
+            }
+
+            return fib; // Trả về giá trị Fibonacci
+        }
+
+        function calculateFibonacci() {
+            const n = 500; // Tính Fibonacci(500)
+            const result = fibonacci(n);
+            document.getElementById('result').innerHTML = `Fibonacci(500): ${result.toString()}`; // Hiển thị kết quả
+        }
+    </script>
+</body>
+</html>

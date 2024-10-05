@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuffle Array</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Shuffle an Array of Strings</h1>
+    
+    <label for="arrayInput">Enter strings (comma separated):</label>
+    <input type="text" id="arrayInput" placeholder="e.g. apple, banana, cherry, date, elderberry">
+    
+    <button onclick="shuffleStrings()">Shuffle</button>
+
+    <div id="result"></div>
+
+    <script>
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr; // Trả về mảng đã được xáo trộn
+        }
+
+        function shuffleStrings() {
+            const inputText = document.getElementById('arrayInput').value; // Lấy đầu vào
+            const stringArray = inputText.split(',').map(str => str.trim()); // Tách chuỗi thành mảng
+            const shuffledArray = shuffleArray(stringArray.slice()); // Xáo trộn mảng
+            document.getElementById('result').innerHTML = `Shuffled array: ${shuffledArray.join(', ')}`; // Hiển thị kết quả
+        }
+    </script>
+</body>
+</html>

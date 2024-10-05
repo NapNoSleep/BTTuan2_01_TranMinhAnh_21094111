@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract Words</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Extract Words from Text</h1>
+    
+    <label for="textInput">Enter your text:</label>
+    <textarea id="textInput" rows="5" cols="40"></textarea>
+    
+    <br><br>
+    
+    <button onclick="extractWordsFromText()">Extract Words</button>
+
+    <div id="result"></div>
+
+    <script>
+        function extractWords(text) {
+            return text.trim().split(/\s+/); // Tách và trả về mảng các từ
+        }
+
+        function extractWordsFromText() {
+            const text = document.getElementById('textInput').value; // Lấy văn bản từ ô nhập
+            const wordsArray = extractWords(text); // Lấy mảng các từ
+            document.getElementById('result').innerHTML = `Words Array: ${JSON.stringify(wordsArray)}`; // Hiển thị kết quả
+        }
+    </script>
+</body>
+</html>

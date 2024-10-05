@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Big Numbers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Two Large Numbers</h1>
+    
+    <label for="number1">Enter the first number:</label>
+    <input type="text" id="number1" value="123456789123456789123456789123456789">
+    
+    <br><br>
+    
+    <label for="number2">Enter the second number:</label>
+    <input type="text" id="number2" value="987654321987654321987654321987654321">
+    
+    <br><br>
+    
+    <button onclick="calculateSum()">Calculate Sum</button>
+
+    <div id="result"></div>
+
+    <script>
+        function addBigNumbers(num1, num2) {
+            let carry = 0; // Variable to store carry
+            let result = ''; // Result string
+            let maxLength = Math.max(num1.length, num2.length); // Get the maximum length of the two numbers
+
+            // Loop from right to left
+            for (let i = 0; i < maxLength; i++) {
+                let digit1 = Number(num1[num1.length - 1 - i]) || 0; // Get digit from num1
+                let digit2 = Number(num2[num2.length - 1 - i]) || 0; // Get digit from num2
+                let sum = digit1 + digit2 + carry; // Add digits and carry
+                result = (sum % 10) + result; // Add to the result string
+                carry = Math.floor(sum / 10); // Update carry
+            }
+
+            // If there's still a carry, add it to the front of the result
+            if (carry) {
+                result = carry + result;
+            }
+
+            return result; // Return the result
+        }
+
+        function calculateSum() {
+            const number1 = document.getElementById('number1').value; // Get first number from input
+            const number2 = document.getElementById('number2').value; // Get second number from input
+            const sum = addBigNumbers(number1, number2); // Calculate the sum
+            document.getElementById('result').innerHTML = `Sum of big numbers: ${sum}`; // Display the result
+        }
+    </script>
+</body>
+</html>

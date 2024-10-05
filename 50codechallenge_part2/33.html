@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum of Numbers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculate Sum of Numbers</h1>
+    
+    <label for="numberInput">Enter numbers (comma delimited):</label>
+    <input type="text" id="numberInput" placeholder="e.g. 1, 2, 3, 4, 5">
+    
+    <br><br>
+    
+    <button onclick="calculateSum()">Calculate Sum</button>
+
+    <div id="result"></div>
+
+    <script>
+        function calculateSumFromCommaDelimitedString(commaDelimitedString) {
+            const numbers = commaDelimitedString.split(',')
+                .map(num => parseFloat(num.trim()));
+            const sum = numbers.reduce((acc, curr) => acc + curr, 0);
+            return sum;
+        }
+
+        function calculateSum() {
+            const input = document.getElementById('numberInput').value; // Get input from textbox
+            const totalSum = calculateSumFromCommaDelimitedString(input); // Calculate the sum
+            document.getElementById('result').innerHTML = `Total Sum: ${totalSum}`; // Display the result
+        }
+    </script>
+</body>
+</html>

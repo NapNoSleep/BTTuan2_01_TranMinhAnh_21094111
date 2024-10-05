@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sum of First 100 Prime Numbers</title>
+</head>
+<body>
+
+    <h1>Sum of First 100 Prime Numbers</h1>
+    <div id="result"></div> <!-- Phần tử để hiển thị kết quả -->
+
+    <script>
+        // Hàm kiểm tra một số có phải là số nguyên tố không
+        function isPrime(num) {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        }
+
+        // Hàm để tính tổng của 100 số nguyên tố đầu tiên
+        function sumFirstNPrimes(n) {
+            const primes = [];
+            let num = 2; // Bắt đầu từ số nguyên tố đầu tiên
+
+            while (primes.length < n) {
+                if (isPrime(num)) {
+                    primes.push(num);
+                }
+                num++;
+            }
+            return primes;
+        }
+
+        // Tính tổng của 100 số nguyên tố đầu tiên
+        const first100Primes = sumFirstNPrimes(100);
+        const sumOfPrimes = first100Primes.reduce((acc, curr) => acc + curr, 0);
+        
+        // Hiển thị kết quả lên trang web
+        document.getElementById('result').innerHTML = `The first 100 prime numbers are: ${first100Primes.join(', ')} <br>
+        The sum of the first 100 prime numbers is: ${sumOfPrimes}`;
+    </script>
+
+</body>
+</html>

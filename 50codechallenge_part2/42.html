@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circle Intersection Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Circle Intersection Checker</h1>
+    
+    <h2>Circle 1</h2>
+    <label for="x1Input">Center X:</label>
+    <input type="number" id="x1Input" placeholder="X1">
+    
+    <label for="y1Input">Center Y:</label>
+    <input type="number" id="y1Input" placeholder="Y1">
+    
+    <label for="radius1Input">Radius:</label>
+    <input type="number" id="radius1Input" placeholder="Radius 1">
+    
+    <h2>Circle 2</h2>
+    <label for="x2Input">Center X:</label>
+    <input type="number" id="x2Input" placeholder="X2">
+    
+    <label for="y2Input">Center Y:</label>
+    <input type="number" id="y2Input" placeholder="Y2">
+    
+    <label for="radius2Input">Radius:</label>
+    <input type="number" id="radius2Input" placeholder="Radius 2">
+    
+    <br><br>
+    
+    <button onclick="checkIntersection()">Check Intersection</button>
+
+    <div id="result"></div>
+
+    <script>
+        function areCirclesIntersecting(x1, y1, radius1, x2, y2, radius2) {
+            const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)); // Tính khoảng cách giữa hai tâm
+            return distance <= (radius1 + radius2); // Kiểm tra giao nhau
+        }
+
+        function checkIntersection() {
+            const x1 = parseFloat(document.getElementById('x1Input').value);
+            const y1 = parseFloat(document.getElementById('y1Input').value);
+            const radius1 = parseFloat(document.getElementById('radius1Input').value);
+            const x2 = parseFloat(document.getElementById('x2Input').value);
+            const y2 = parseFloat(document.getElementById('y2Input').value);
+            const radius2 = parseFloat(document.getElementById('radius2Input').value);
+
+            const areIntersecting = areCirclesIntersecting(x1, y1, radius1, x2, y2, radius2); // Kiểm tra giao nhau
+            document.getElementById('result').innerHTML = `Are the circles intersecting? ${areIntersecting}`; // Hiển thị kết quả
+        }
+    </script>
+</body>
+</html>

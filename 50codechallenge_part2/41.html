@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distance Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Distance Calculator</h1>
+    
+    <label for="x1Input">Point 1 - X:</label>
+    <input type="number" id="x1Input" placeholder="X1">
+    
+    <label for="y1Input">Point 1 - Y:</label>
+    <input type="number" id="y1Input" placeholder="Y1">
+    
+    <br><br>
+
+    <label for="x2Input">Point 2 - X:</label>
+    <input type="number" id="x2Input" placeholder="X2">
+    
+    <label for="y2Input">Point 2 - Y:</label>
+    <input type="number" id="y2Input" placeholder="Y2">
+    
+    <br><br>
+    
+    <button onclick="calculateAndDisplayDistance()">Calculate Distance</button>
+
+    <div id="result"></div>
+
+    <script>
+        function calculateDistance(x1, y1, x2, y2) {
+            const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)); // Tính khoảng cách
+            return distance; // Trả về khoảng cách
+        }
+
+        function calculateAndDisplayDistance() {
+            const x1 = parseFloat(document.getElementById('x1Input').value);
+            const y1 = parseFloat(document.getElementById('y1Input').value);
+            const x2 = parseFloat(document.getElementById('x2Input').value);
+            const y2 = parseFloat(document.getElementById('y2Input').value);
+
+            const distance = calculateDistance(x1, y1, x2, y2); // Tính khoảng cách
+            document.getElementById('result').innerHTML = `Distance between points: ${distance}`; // Hiển thị kết quả
+        }
+    </script>
+</body>
+</html>

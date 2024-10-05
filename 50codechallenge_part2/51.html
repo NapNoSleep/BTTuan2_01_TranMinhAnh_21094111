@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Frequency</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Letter Frequency</h1>
+    
+    <label for="textInput">Enter text:</label>
+    <input type="text" id="textInput" placeholder="e.g. Hello World!">
+    
+    <button onclick="calculateFrequency()">Calculate Frequency</button>
+
+    <div id="result"></div>
+
+    <script>
+        function letterFrequency(str) {
+            const frequencyMap = {};
+
+            for (const char of str) {
+                if (char.match(/[a-zA-Z]/)) { // Kiểm tra xem ký tự có phải là chữ cái hay không
+                    const lowerChar = char.toLowerCase(); // Chuyển ký tự về chữ thường
+                    frequencyMap[lowerChar] = (frequencyMap[lowerChar] || 0) + 1; // Tăng số lần xuất hiện
+                }
+            }
+
+            return Object.entries(frequencyMap); // Chuyển đổi đối tượng thành mảng
+        }
+
+        function calculateFrequency() {
+            const inputText = document.getElementById('textInput').value; // Lấy đầu vào
+            const frequencyArray = letterFrequency(inputText); // Tính tần suất
+            document.getElementById('result').innerHTML = `Letter frequency: ${JSON.stringify(frequencyArray)}`; // Hiển thị kết quả
+        }
+    </script>
+</body>
+</html>

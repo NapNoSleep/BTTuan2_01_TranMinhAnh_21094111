@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate 70!</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculate 70!</h1>
+    
+    <button onclick="calculateFactorial()">Calculate</button>
+
+    <div id="result"></div>
+
+    <script>
+        function factorial(n) {
+            if (n < 0) return "Invalid input"; // Kiểm tra đầu vào âm
+            if (n === 0 || n === 1) return BigInt(1); // Giai thừa của 0 và 1 là 1
+
+            let result = BigInt(1); // Khởi tạo kết quả với BigInt(1)
+
+            for (let i = 2; i <= n; i++) {
+                result *= BigInt(i); // Nhân từng số với kết quả
+            }
+
+            return result; // Trả về kết quả
+        }
+
+        function calculateFactorial() {
+            const n = 70; // Tính 70!
+            const result = factorial(n);
+            document.getElementById('result').innerHTML = `70! = ${result.toString()}`; // Hiển thị kết quả
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jagged Array Deep Copy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jagged Array Deep Copy</h1>
+    
+    <label for="arrayInput">Jagged Array (in JSON format):</label>
+    <input type="text" id="arrayInput" placeholder='e.g. [1, [2, 3], [4, [5, 6]], 7, 8, [9]]'>
+    
+    <button onclick="deepCopy()">Deep Copy</button>
+
+    <div id="result"></div>
+
+    <script>
+        function deepCopyJaggedArray(arr) {
+            if (!Array.isArray(arr)) {
+                return arr; // Trả về chính nó nếu không phải là mảng
+            }
+
+            const newArray = []; // Khởi tạo mảng mới
+
+            for (let element of arr) {
+                if (Array.isArray(element)) {
+                    newArray.push(deepCopyJaggedArray(element)); // Gọi đệ quy
+                } else {
+                    newArray.push(element); // Thêm phần tử vào mảng mới
+                }
+            }
+
+            return newArray; // Trả về mảng sao chép sâu
+        }
+
+        function deepCopy() {
+            const arrayInput = document.getElementById('arrayInput').value; // Lấy đầu vào
+            let jaggedArray;
+
+            try {
+                jaggedArray = JSON.parse(arrayInput); // Chuyển đổi chuỗi JSON thành mảng
+                if (!Array.isArray(jaggedArray)) throw new Error(); // Kiểm tra xem có phải mảng không
+
+                const copiedArray = deepCopyJaggedArray(jaggedArray); // Sao chép sâu
+                document.getElementById('result').innerHTML = `Copied Jagged Array: ${JSON.stringify(copiedArray)}`; // Hiển thị kết quả
+            } catch (error) {
+                document.getElementById('result').innerHTML = 'Invalid input. Please enter a valid jagged array in JSON format.'; // Thông báo lỗi
+            }
+        }
+    </script>
+</body>
+</html>

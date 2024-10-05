@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV to Bi-Dimensional Array</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Convert CSV to Bi-Dimensional Array</h1>
+    
+    <label for="csvInput">Enter CSV text:</label>
+    <textarea id="csvInput" rows="10" cols="40" placeholder="e.g. Name, Age, City\nJohn, 30, New York\nJane, 25, Los Angeles"></textarea>
+    
+    <br><br>
+    
+    <button onclick="convertCSV()">Convert to Array</button>
+
+    <div id="result"></div>
+
+    <script>
+        function csvToBiDimensionalArray(csvText) {
+            const rows = csvText.trim().split('\n');
+            const biDimensionalArray = rows.map(row => row.split(',').map(cell => cell.trim())); 
+            return biDimensionalArray;
+        }
+
+        function convertCSV() {
+            const csvText = document.getElementById('csvInput').value; // Lấy CSV từ ô nhập
+            const resultArray = csvToBiDimensionalArray(csvText); // Chuyển đổi CSV thành mảng hai chiều
+            document.getElementById('result').innerHTML = `Bi-dimensional Array: ${JSON.stringify(resultArray)}`; // Hiển thị kết quả
+        }
+    </script>
+</body>
+</html>

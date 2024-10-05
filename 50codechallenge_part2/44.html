@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary to Decimal Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Binary to Decimal Converter</h1>
+    
+    <label for="binaryInput">Binary String:</label>
+    <input type="text" id="binaryInput" placeholder="Enter binary string">
+    
+    <button onclick="convertBinary()">Convert</button>
+
+    <div id="result"></div>
+
+    <script>
+        function binaryToDecimal(binaryString) {
+            if (!/^[01]+$/.test(binaryString)) {
+                throw new Error("Invalid binary string"); // Ném lỗi nếu chuỗi không hợp lệ
+            }
+            
+            let decimalNumber = 0; // Khởi tạo số thập phân
+            const length = binaryString.length;
+
+            for (let i = 0; i < length; i++) {
+                decimalNumber += parseInt(binaryString[i]) * Math.pow(2, length - 1 - i); // Tính giá trị thập phân
+            }
+            
+            return decimalNumber; // Trả về số thập phân
+        }
+
+        function convertBinary() {
+            const binaryString = document.getElementById('binaryInput').value; // Lấy chuỗi nhị phân từ ô nhập
+            
+            try {
+                const decimalNumber = binaryToDecimal(binaryString); // Chuyển đổi
+                document.getElementById('result').innerHTML = `The decimal value of binary ${binaryString} is: ${decimalNumber}`; // Hiển thị kết quả
+            } catch (error) {
+                document.getElementById('result').innerHTML = error.message; // Hiển thị thông báo lỗi
+            }
+        }
+    </script>
+</body>
+</html>

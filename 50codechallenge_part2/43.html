@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract Column from 2D Array</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Extract Column from 2D Array</h1>
+    
+    <label for="columnIndexInput">Column Index:</label>
+    <input type="number" id="columnIndexInput" placeholder="Column Index">
+    
+    <button onclick="extractAndDisplayColumn()">Extract Column</button>
+
+    <div id="result"></div>
+
+    <script>
+        function extractColumn(matrix, columnIndex) {
+            if (matrix.length === 0 || columnIndex < 0 || columnIndex >= matrix[0].length) {
+                return []; // Nếu không hợp lệ, trả về mảng rỗng
+            }
+            
+            const column = [];
+            
+            for (let i = 0; i < matrix.length; i++) {
+                column.push(matrix[i][columnIndex]); // Thêm phần tử cột vào mảng mới
+            }
+            
+            return column; // Trả về mảng cột
+        }
+
+        function extractAndDisplayColumn() {
+            // Mảng hai chiều mẫu
+            const biDimensionalArray = [
+                [1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]
+            ];
+            const columnIndex = parseInt(document.getElementById('columnIndexInput').value); // Lấy chỉ số cột từ ô nhập
+            
+            const extractedColumn = extractColumn(biDimensionalArray, columnIndex); // Trích xuất cột
+            document.getElementById('result').innerHTML = `Extracted column: ${extractedColumn.join(', ')}`; // Hiển thị kết quả
+        }
+    </script>
+</body>
+</html>
